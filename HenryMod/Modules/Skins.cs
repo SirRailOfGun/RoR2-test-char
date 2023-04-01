@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules
+namespace DuskWing.Modules
 {
     internal static class Skins
     {
@@ -88,9 +88,9 @@ namespace HenryMod.Modules
         /// pass in strings for mesh assets in your bundle. pass the same amount and order based on your rendererinfos, filling with null as needed
         /// <code>
         /// myskindef.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
-        ///    "meshHenrySword",
+        ///    "meshDuskWingSword",
         ///    null,
-        ///    "meshHenry");
+        ///    "meshDuskWing");
         /// </code>
         /// </summary>
         /// <param name="defaultRendererInfos">your skindef's rendererinfos to access the renderers</param>

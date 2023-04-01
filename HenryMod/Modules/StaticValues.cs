@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HenryMod.Modules
+namespace DuskWing.Modules
 {
     internal static class StaticValues
     {
@@ -12,7 +12,11 @@ namespace HenryMod.Modules
 
         internal const float swordDamageCoefficient = 2.8f;
 
+        internal const float VeilRifleDamageCoefficient = 1.0f;
+
         internal const float gunDamageCoefficient = 4.2f;
+
+        internal const float BurstLauncherDamageCoefficient = 1.0f;
 
         internal const float bombDamageCoefficient = 16f;
     }

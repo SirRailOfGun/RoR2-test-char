@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine;
 
-namespace HenryMod.SkillStates
+namespace DuskWing.SkillStates
 {
     public class Shoot : BaseSkillState
     {

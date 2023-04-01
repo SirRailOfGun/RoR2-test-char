@@ -1,5 +1,5 @@
 ﻿using BepInEx;
-using HenryMod.Modules.Survivors;
+using DuskWing.Modules.Survivors;
 using R2API.Utils;
 using RoR2;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Security.Permissions;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
 
 //rename this namespace
-namespace HenryMod
+namespace DuskWing
 {
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
@@ -23,23 +23,25 @@ namespace HenryMod
         "UnlockableAPI"
     })]
 
-    public class HenryPlugin : BaseUnityPlugin
+    public class DuskWing : BaseUnityPlugin
     {
         // if you don't change these you're giving permission to deprecate the mod-
         //  please change the names to your own stuff, thanks
         //   this shouldn't even have to be said
-        public const string MODUID = "com.rob.HenryMod";
-        public const string MODNAME = "HenryMod";
-        public const string MODVERSION = "1.0.0";
+        public const string MODUID = "com.SirRailOfGun.DuskWing";
+        public const string MODNAME = "DuskWing";
+        public const string MODVERSION = "0.1.0";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
-        public const string DEVELOPER_PREFIX = "ROB";
+        public const string DEVELOPER_PREFIX = "SROG";
 
-        public static HenryPlugin instance;
+        public static DuskWing instance;
 
+        public static PluginInfo PInfo { get; private set; }
         private void Awake()
         {
             instance = this;
+            PInfo = Info;
 
             Log.Init(Logger);
             Modules.Assets.Initialize(); // load assets and read config

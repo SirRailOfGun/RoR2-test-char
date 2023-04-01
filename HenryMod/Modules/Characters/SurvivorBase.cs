@@ -1,12 +1,12 @@
 ﻿using BepInEx.Configuration;
 using RoR2;
 using System;
-using HenryMod.Modules.Characters;
+using DuskWing.Modules.Characters;
 using UnityEngine;
 using System.Collections.Generic;
 using RoR2.Skills;
 
-namespace HenryMod.Modules.Survivors
+namespace DuskWing.Modules.Survivors
 {
     internal abstract class SurvivorBase : CharacterBase
     {

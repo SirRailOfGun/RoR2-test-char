@@ -5,15 +5,15 @@ using UnityEngine;
 
 namespace DuskWing.SkillStates
 {
-    public class ThrowBomb : GenericProjectileBaseState
+    public class BurstLauncher : GenericProjectileBaseState
     {
 
-        public static float BaseDuration = 0.65f;
+        public static float BaseDuration = 0.3f;
         //delay here for example and to match animation
         //ordinarily I recommend not having a delay before projectiles. makes the move feel sluggish
-        public static float BaseDelayDuration = 0.01f * BaseDuration;
+        //public static float BaseDelayDuration = 0.01f * BaseDuration;
 
-        public static float DamageCoefficient = 1.6f;
+        public static float DamageCoefficient = 1.5f;
 
         public override void OnEnter()
         {
@@ -24,11 +24,11 @@ namespace DuskWing.SkillStates
             base.attackSoundString = "DuskWingBombThrow";
             
             base.baseDuration = BaseDuration;
-            base.baseDelayBeforeFiringProjectile = BaseDelayDuration;
+            //base.baseDelayBeforeFiringProjectile = BaseDelayDuration;
 
             base.damageCoefficient = DamageCoefficient;
             //proc coefficient is set on the components of the projectile prefab
-            base.force = 80f;
+            base.force = 100f;
 
             //base.projectilePitchBonus = 0;
             //base.minSpread = 0;

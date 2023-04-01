@@ -7,12 +7,13 @@ using System.IO;
 using System.Collections.Generic;
 using RoR2.UI;
 using System;
+using Path = System.IO.Path;
 
-namespace HenryMod.Modules
+namespace DuskWing.Modules
 {
     internal static class Assets
     {
-        #region henry's stuff
+        #region DuskWing's stuff
         // particle effects
         internal static GameObject swordSwingEffect;
         internal static GameObject swordHitImpactEffect;
@@ -27,10 +28,20 @@ namespace HenryMod.Modules
         internal static AssetBundle mainAssetBundle;
 
         // CHANGE THIS
-        private const string assetbundleName = "myassetbundle";
+        private const string assetbundleName = "duskwingassets";
         //change this to your project's name if/when you've renamed it
-        private const string csProjName = "HenryMod";
-        
+        private const string csProjName = "DuskWing";
+        //The direct path to your AssetBundle
+        public static string AssetBundlePath
+        {
+            get
+            {
+                //This returns the path to your assetbundle assuming said bundle is on the same folder as your DLL. If you have your bundle in a folder, you can uncomment the statement below this one.
+                return Path.Combine(Path.GetDirectoryName(DuskWing.PInfo.Location), assetbundleName);
+                //return Path.Combine(Path.GetDirectoryName(MainClass.PInfo.Location), assetBundleFolder, myBundle);
+            }
+        }
+
         internal static void Initialize()
         {
             if (assetbundleName == "myassetbundle")
@@ -40,7 +51,7 @@ namespace HenryMod.Modules
             }
 
             LoadAssetBundle();
-            LoadSoundbank();
+            //LoadSoundbank();
             PopulateAssets();
         }
 
@@ -48,13 +59,14 @@ namespace HenryMod.Modules
         {
             try
             {
-                if (mainAssetBundle == null)
-                {
-                    using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{csProjName}.{assetbundleName}"))
-                    {
-                        mainAssetBundle = AssetBundle.LoadFromStream(assetStream);
-                    }
-                }
+                mainAssetBundle = AssetBundle.LoadFromFile(AssetBundlePath);
+                //if (mainAssetBundle == null)
+                //{
+                //    using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{csProjName}.{assetbundleName}"))
+                //    {
+                //        mainAssetBundle = AssetBundle.LoadFromStream(assetStream);
+                //    }
+                //}
             }
             catch (Exception e)
             {
@@ -63,15 +75,15 @@ namespace HenryMod.Modules
             }
         }
 
-        internal static void LoadSoundbank()
-        {
-            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{csProjName}.HenryBank.bnk"))
-            {
-                byte[] array = new byte[manifestResourceStream2.Length];
-                manifestResourceStream2.Read(array, 0, array.Length);
-                SoundAPI.SoundBanks.Add(array);
-            }
-        }
+        //internal static void LoadSoundbank()
+        //{
+        //    using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{csProjName}.DuskWingBank.bnk"))
+        //    {
+        //        byte[] array = new byte[manifestResourceStream2.Length];
+        //        manifestResourceStream2.Read(array, 0, array.Length);
+        //        SoundAPI.SoundBanks.Add(array);
+        //    }
+        //}
 
         internal static void PopulateAssets()
         {
@@ -84,9 +96,9 @@ namespace HenryMod.Modules
             // feel free to delete everything in here and load in your own assets instead
             // it should work fine even if left as is- even if the assets aren't in the bundle
             
-            swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
+            swordHitSoundEvent = CreateNetworkSoundEventDef("DuskWingSwordHit");
 
-            bombExplosionEffect = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
+            bombExplosionEffect = LoadEffect("BombExplosionEffect", "DuskWingBombExplosion");
 
             if (bombExplosionEffect)
             {
@@ -104,8 +116,8 @@ namespace HenryMod.Modules
                 };
             }
 
-            swordSwingEffect = Assets.LoadEffect("HenrySwordSwingEffect", true);
-            swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
+            swordSwingEffect = Assets.LoadEffect("DuskWingSwordSwingEffect", true);
+            swordHitImpactEffect = Assets.LoadEffect("ImpactDuskWingSlash");
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)
@@ -170,7 +182,7 @@ namespace HenryMod.Modules
         public static GameObject LoadSurvivorModel(string modelName) {
             GameObject model = mainAssetBundle.LoadAsset<GameObject>(modelName);
             if (model == null) {
-                Log.Error("Trying to load a null model- check to see if the BodyName in your code matches the prefab name of the object in Unity\nFor Example, if your prefab in unity is 'mdlHenry', then your BodyName must be 'Henry'");
+                Log.Error("Trying to load a null model- check to see if the BodyName in your code matches the prefab name of the object in Unity\nFor Example, if your prefab in unity is 'mdlDuskWing', then your BodyName must be 'DuskWing'");
                 return null;
             }
 
