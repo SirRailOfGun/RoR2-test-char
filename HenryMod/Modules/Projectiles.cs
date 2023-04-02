@@ -1,6 +1,7 @@
 ﻿using R2API;
 using RoR2;
 using RoR2.Projectile;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -28,17 +29,18 @@ namespace DuskWing.Modules
 
             ProjectileImpactExplosion bombImpactExplosion = bombPrefab.GetComponent<ProjectileImpactExplosion>();
             InitializeImpactExplosion(bombImpactExplosion);
+            bombPrefab.GetComponent<ProjectileSimple>().desiredForwardSpeed = 200f;
 
-            bombImpactExplosion.blastRadius = 16f;
+            bombImpactExplosion.blastRadius = 4f;
             bombImpactExplosion.destroyOnEnemy = true;
             bombImpactExplosion.lifetime = 12f;
-            bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
+            //bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
             //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("DuskWingBombExplosion");
             bombImpactExplosion.timerAfterImpact = true;
-            bombImpactExplosion.lifetimeAfterImpact = 0.1f;
+            bombImpactExplosion.lifetimeAfterImpact = 0f;
 
             ProjectileController bombController = bombPrefab.GetComponent<ProjectileController>();
-            if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("DuskWingBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("DuskWingBombGhost");
+            if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("DWgrenadeGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("DWgrenadeGhost");
             bombController.startSound = "";
         }
 

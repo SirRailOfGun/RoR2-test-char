@@ -10,12 +10,7 @@ namespace DuskWing.Modules
             #region DuskWing
             string prefix = DuskWing.DEVELOPER_PREFIX + "_DUSK_WING_BODY_";
 
-            string desc = "The SSC Dusk Wing frame is a mobile hard suit developed with DHIYED-derived technologies.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > The Veil Rifle can pierce through foes and terrain alike." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > The Burst Launcher will stun foes on crit. Use it agianst foes that have been Locked On." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > The Stun Crown's cooldown is quite long. Use it with purpose." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Hall Of Mirrors is a passive in disguise. Use it to empower your attacks, or to reposition yourself quickly." + Environment.NewLine + Environment.NewLine;
-
+            string desc = StaticValues.descriptionText;
             string outro = "..You think I escaped? That this is all real?";
             string outroFailure = "Many things happened the moment I think I died.";
 
@@ -48,16 +43,19 @@ namespace DuskWing.Modules
             #endregion
 
             #region Secondary
-            LanguageAPI.Add(prefix + "SECONDARY_GUN_NAME", "Handgun");
-            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Helpers.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * StaticValues.gunDamageCoefficient}% damage</style>.");
+            //LanguageAPI.Add(prefix + "SECONDARY_GUN_NAME", "Handgun");
+            //LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Helpers.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * StaticValues.gunDamageCoefficient}% damage</style>.");
 
-            LanguageAPI.Add(prefix + "SECONDARY_GUN_NAME", "Burst Launcher");
-            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", $"Fire a grenade for <style=cIsDamage>{100f * StaticValues.BurstLauncherDamageCoefficient}% damage</style> which <style=cIsUtility>stuns</style> on crit.");
+            LanguageAPI.Add(prefix + "SECONDARY_BURST_LAUNCHER_NAME", "Burst Launcher");
+            LanguageAPI.Add(prefix + "SECONDARY_BURST_LAUNCHER_DESCRIPTION", $"Fire a grenade for <style=cIsDamage>{100f * StaticValues.BurstLauncherDamageCoefficient}% damage</style> which <style=cIsUtility>stuns</style> on crit.");
             #endregion
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_ROLL_NAME", "Roll");
             LanguageAPI.Add(prefix + "UTILITY_ROLL_DESCRIPTION", "Roll a short distance, gaining <style=cIsUtility>300 armor</style>. <style=cIsUtility>You cannot be hit during the roll.</style>");
+
+            LanguageAPI.Add(prefix + "UTILITY_STUN_CROWN_NAME", "Stun Crown");
+            LanguageAPI.Add(prefix + "UTILITY_STUN_CROWN_DESCRIPTION", $"Emit a blinding flash, dealing <style=cIsDamage>{100f * StaticValues.StunCrownDamageCoefficient}% damage</style> and <style=cIsUtility>stunning</style> foes for 5 seconds.");
             #endregion
 
             #region Special

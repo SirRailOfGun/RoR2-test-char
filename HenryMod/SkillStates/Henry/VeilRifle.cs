@@ -1,4 +1,5 @@
-﻿using EntityStates;
+﻿using DuskWing.Modules;
+using EntityStates;
 using RoR2;
 using UnityEngine;
 
@@ -34,7 +35,7 @@ namespace DuskWing.SkillStates
                     maxSpread = 0f,
                     bulletCount = 1U,
                     procCoefficient = 1f,
-                    damage = base.characterBody.damage * 1f,
+                    damage = base.characterBody.damage * StaticValues.VeilRifleDamageCoefficient,
                     force = 3,
                     falloffModel = BulletAttack.FalloffModel.None,
                     muzzleName = "MuzzleRight",

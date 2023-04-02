@@ -1,4 +1,5 @@
-﻿using EntityStates;
+﻿using DuskWing.Modules;
+using EntityStates;
 using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace DuskWing.SkillStates
         //ordinarily I recommend not having a delay before projectiles. makes the move feel sluggish
         //public static float BaseDelayDuration = 0.01f * BaseDuration;
 
-        public static float DamageCoefficient = 1.5f;
+        public static float DamageCoefficient = StaticValues.BurstLauncherDamageCoefficient;
 
         public override void OnEnter()
         {
@@ -28,7 +29,7 @@ namespace DuskWing.SkillStates
 
             base.damageCoefficient = DamageCoefficient;
             //proc coefficient is set on the components of the projectile prefab
-            base.force = 100f;
+            base.force = 500f;
 
             //base.projectilePitchBonus = 0;
             //base.minSpread = 0;

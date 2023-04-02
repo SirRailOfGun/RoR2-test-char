@@ -12,7 +12,7 @@ namespace DuskWing.Modules.Survivors
     {
         //used when building your character using the prefabs you set up in unity
         //don't upload to thunderstore without changing this
-        public override string prefabBodyName => "Henry";
+        public override string prefabBodyName => "DuskWing";
 
         public const string DUSKWING_PREFIX = DuskWing.DEVELOPER_PREFIX + "_DUSK_WING_BODY_";
 
@@ -107,14 +107,14 @@ namespace DuskWing.Modules.Survivors
             #region Secondary
             SkillDef secondarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_DUSK_WING_BODY_SPECIAL_BOMB_NAME",
-                skillNameToken = prefix + "_DUSK_WING_BODY_SPECIAL_BOMB_NAME",
-                skillDescriptionToken = prefix + "_DUSK_WING_BODY_SPECIAL_BOMB_DESCRIPTION",
+                skillName = prefix + "_DUSK_WING_BODY_SECONDARY_BURST_LAUNCHER_NAME",
+                skillNameToken = prefix + "_DUSK_WING_BODY_SECONDARY_BURST_LAUNCHER_NAME",
+                skillDescriptionToken = prefix + "_DUSK_WING_BODY_SECONDARY_BURST_LAUNCHER_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSSCRangedAttackIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.BurstLauncher)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
-                baseRechargeInterval = 10f,
+                baseRechargeInterval = 4f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -133,19 +133,19 @@ namespace DuskWing.Modules.Survivors
             #endregion
 
             #region Utility
-            SkillDef rollSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef utilitySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_DUSK_WING_BODY_UTILITY_ROLL_NAME",
-                skillNameToken = prefix + "_DUSK_WING_BODY_UTILITY_ROLL_NAME",
-                skillDescriptionToken = prefix + "_DUSK_WING_BODY_UTILITY_ROLL_DESCRIPTION",
+                skillName = prefix + "_DUSK_WING_BODY_UTILITY_STUN_CROWN_NAME",
+                skillNameToken = prefix + "_DUSK_WING_BODY_UTILITY_STUN_CROWN_NAME",
+                skillDescriptionToken = prefix + "_DUSK_WING_BODY_UTILITY_STUN_CROWN_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Roll)),
-                activationStateMachineName = "Body",
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.StunCrown)),
+                activationStateMachineName = "Slide",
                 baseMaxStock = 1,
-                baseRechargeInterval = 4f,
+                baseRechargeInterval = 5f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
-                forceSprintDuringState = true,
+                forceSprintDuringState = false,
                 fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
@@ -157,7 +157,7 @@ namespace DuskWing.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddUtilitySkills(bodyPrefab, rollSkillDef);
+            Modules.Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef);
             #endregion
 
             #region Special

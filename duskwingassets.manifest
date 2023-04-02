@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 613874861
+CRC: 1001300160
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2cb395f5a27ed1649bb20a2847923141
+    Hash: 117507d07aa06d1ae4db209f0c754bc3
   TypeTreeHash:
     serializedVersion: 2
     Hash: 740584176fc78b859e604f8258f4482c
@@ -68,7 +68,7 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/HenryAssets/Animation/maskAimBazooka.mask
-- Assets/HenryAssets/Icons/texSSCLineAttack.png
+- Assets/HenryAssets/DuskWingDisplay.prefab
 - Assets/HenryAssets/Icons/texShotgunIcon.png
 - Assets/HenryAssets/VFX/Materials/matAnimeShapes.mat
 - Assets/HenryAssets/VFX/Textures/texPunchImpactShadow.png
@@ -85,23 +85,27 @@ Assets:
 - Assets/HenryAssets/Textures/texHenryAlt.png
 - Assets/HenryAssets/Icons/texPassiveIcon.png
 - Assets/HenryAssets/VFX/Textures/texFire.tga
+- Assets/HenryAssets/Icons/texSSCRangedAttackIcon.png
 - Assets/HenryAssets/Animation/clips/Jump.anim
 - Assets/HenryAssets/Mesh/meshHenryNeo.mesh
 - Assets/HenryAssets/Animation/clips/WalkR.anim
 - Assets/HenryAssets/VFX/HenryDustEffect.prefab
 - Assets/HenryAssets/Animation/clips/SprintL.anim
 - Assets/HenryAssets/Materials/matRebellion.mat
+- Assets/HenryAssets/Icons/texSSCLineAttackIcon.png
 - Assets/HenryAssets/VFX/Materials/matSmoke.mat
 - Assets/HenryAssets/VFX/Textures/texSwingEffect.png
 - Assets/HenryAssets/Textures/texBoxingGlove.png
 - Assets/HenryAssets/Animation/maskAimYaw.mask
 - Assets/HenryAssets/Icons/texDanteAchievement.png
 - Assets/HenryAssets/Icons/texSecondaryIcon.png
+- Assets/HenryAssets/Mesh/Dusk Wing 2.fbx
 - Assets/HenryAssets/Animation/animHenry.controller
 - Assets/HenryAssets/VFX/Materials/matHenrySwing2.mat
 - Assets/HenryAssets/Textures/texBazooka.png
 - Assets/HenryAssets/VFX/Textures/texRipple.png
 - Assets/HenryAssets/VFX/ImpactHenrySlash.prefab
+- Assets/HenryAssets/Mesh/Dusk Wing 3.fbx
 - Assets/HenryAssets/VFX/Mesh/meshSwing.asset
 - Assets/HenryAssets/VFX/HenryBazookaMuzzleFlash.prefab
 - Assets/HenryAssets/VFX/HenryFistSwingEffect.prefab
@@ -126,7 +130,6 @@ Assets:
 - Assets/HenryAssets/Mesh/meshYamato.mesh
 - Assets/HenryAssets/VFX/Textures/texDust.png
 - Assets/HenryAssets/VFX/Textures/texHitSpark.png
-- Assets/HenryAssets/Icons/texSSCRangedAttack.png
 - Assets/HenryAssets/Materials/matBoxingGlove.mat
 - Assets/HenryAssets/Materials/matHenryAlt.mat
 - Assets/HenryAssets/Animation/clips/WalkF.anim
@@ -174,6 +177,7 @@ Assets:
 - Assets/HenryAssets/Mesh/meshRebellion.mesh
 - Assets/HenryAssets/VFX/Materials/matHitSparkPunch.mat
 - Assets/HenryAssets/VFX/Materials/matSwingEffect.mat
+- Assets/HenryAssets/DWgrenadeGhost.prefab
 - Assets/HenryAssets/Mesh/meshHenrySword.mesh
 - Assets/HenryAssets/VFX/Materials/matEmbers.mat
 - Assets/HenryAssets/Animation/clips/AimYaw.anim
@@ -194,6 +198,7 @@ Assets:
 - Assets/HenryAssets/Animation/clips/DefaultPose.anim
 - Assets/HenryAssets/Materials/matShotgun.mat
 - Assets/HenryAssets/Animation/clips/IdleAdditive.anim
+- Assets/HenryAssets/mdlDuskWing.prefab
 - Assets/HenryAssets/Icons/texBazookaFireIcon.png
 - Assets/HenryAssets/VFX/Materials/matFire.mat
 - Assets/HenryAssets/Icons/texGrandMasteryAchievement.png

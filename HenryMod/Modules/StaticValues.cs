@@ -4,11 +4,12 @@ namespace DuskWing.Modules
 {
     internal static class StaticValues
     {
-        internal static string descriptionText = "Henry is a skilled fighter who makes use of a wide arsenal of weaponry to take down his foes.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
-             + "< ! > Sword is a good all-rounder while Boxing Gloves are better for laying a beatdown on more powerful foes." + Environment.NewLine + Environment.NewLine
-             + "< ! > Pistol is a powerful anti air, with its low cooldown and high damage." + Environment.NewLine + Environment.NewLine
-             + "< ! > Roll has a lingering armor buff that helps to use it aggressively." + Environment.NewLine + Environment.NewLine
-             + "< ! > Bomb can be used to wipe crowds with ease." + Environment.NewLine + Environment.NewLine;
+        internal static string descriptionText = "The SSC Dusk Wing frame is a mobile hard suit developed with DHIYED-derived technologies.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine 
+            + "< ! > The Veil Rifle can pierce through foes and terrain alike." + Environment.NewLine + Environment.NewLine
+            + "< ! > The Burst Launcher will stun foes on crit. Use it agianst foes that have been Locked On." + Environment.NewLine + Environment.NewLine
+            + "< ! > The Stun Crown's cooldown is quite long. Use it with purpose." + Environment.NewLine + Environment.NewLine
+            + "< ! > Hall Of Mirrors is a passive in disguise. Use it to empower your attacks, or to reposition yourself quickly." + Environment.NewLine + Environment.NewLine;
+
 
         internal const float swordDamageCoefficient = 2.8f;
 
@@ -16,7 +17,10 @@ namespace DuskWing.Modules
 
         internal const float gunDamageCoefficient = 4.2f;
 
-        internal const float BurstLauncherDamageCoefficient = 1.0f;
+        internal const float BurstLauncherDamageCoefficient = 3.5f;
+
+        internal const float StunCrownDamageCoefficient = 1.0f;
+        internal const float StunCrownBlastSize = 40.0f;
 
         internal const float bombDamageCoefficient = 16f;
     }
