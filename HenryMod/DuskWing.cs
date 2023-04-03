@@ -1,10 +1,15 @@
 ﻿using BepInEx;
+using DuskWing.Modules;
 using DuskWing.Modules.Survivors;
+using R2API;
 using R2API.Utils;
 using RoR2;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
+using UnityEngine;
+using UnityEngine.Networking;
+using static R2API.DamageAPI;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -25,6 +30,8 @@ namespace DuskWing
 
     public class DuskWing : BaseUnityPlugin
     {
+        public static DamageAPI.ModdedDamageType StunCrownDamageType = DamageAPI.ReserveDamageType();
+
         // if you don't change these you're giving permission to deprecate the mod-
         //  please change the names to your own stuff, thanks
         //   this shouldn't even have to be said
@@ -58,6 +65,7 @@ namespace DuskWing
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();
 
+            On.RoR2.HealthComponent.TakeDamage += StunCrownDamageHandler;
             Hook();
         }
 
@@ -79,6 +87,28 @@ namespace DuskWing
                     self.armor += 300f;
                 }
             }
+        }
+
+        private static void StunCrownDamageHandler(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo info)
+        {
+            if (!self.isInFrozenState)
+            {
+                Debug.Log("test");
+                if (info.HasModdedDamageType(StunCrownDamageType))
+                {
+                    if (NetworkServer.active)
+                    {
+                        Debug.Log("test 2");
+                        var onHurt = self.body.GetComponent<SetStateOnHurt>();
+                        if (onHurt)
+                        {
+                            Debug.Log("test 3");
+                            onHurt.SetStun(StaticValues.StunCrownStun);
+                        }
+                    }
+                }
+            }
+            orig(self, info);
         }
     }
 }

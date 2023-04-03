@@ -21,6 +21,7 @@ namespace DuskWing.Modules
 
         internal const float StunCrownDamageCoefficient = 1.0f;
         internal const float StunCrownBlastSize = 40.0f;
+        internal const float StunCrownStun = 5f;
 
         internal const float bombDamageCoefficient = 16f;
     }
