@@ -7,15 +7,16 @@ namespace DuskWing.Modules
     public static class Buffs
     {
         // armor buff gained during roll
-        internal static BuffDef armorBuff;
+        internal static BuffDef lockOnBuff;
 
         internal static void RegisterBuffs()
         {
-            armorBuff = AddNewBuff("DuskWingArmorBuff",
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite, 
-                Color.white, 
+            Sprite hologramIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texBazookaOutIcon");
+            lockOnBuff = AddNewBuff("DuskWingLockOnDebuff",
+                hologramIcon, 
+                Color.red, 
                 false, 
-                false);
+                true);
         }
 
         // simple helper method

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3d686e035b41d454bb40e6538c135530
+guid: 682ebe1ed49620d448611364ff5f4510
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -8,7 +8,42 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: D_Wing
-    second: {fileID: 2100000, guid: f2fcb508f204567429c00e6c1d9b6976, type: 2}
+    second: {fileID: 2100000, guid: 08713e5a9ddf471429e77a9abd80e0e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes
+    second: {fileID: 2100000, guid: 75a32ac11c275314b9f9cf6c291dac0e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gunmetal
+    second: {fileID: 2100000, guid: 9c7f61d0f78b9e6439d36b7dcb4d1063, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hinge
+    second: {fileID: 2100000, guid: d7984cd35eb0a8740ad4f4d94923473b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HingeDark
+    second: {fileID: 2100000, guid: 8152ebf30bf09e040a521e4be9a887f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh
+    second: {fileID: 2100000, guid: efad4c317722ddf45b12b488161b6104, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Silver
+    second: {fileID: 2100000, guid: 0006a7f1d3684154cae4ff344fc0f411, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leather
+    second: {fileID: 2100000, guid: d92d514eda70f344fa9ce19197881a94, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -46,8 +81,8 @@ ModelImporter:
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0

@@ -31,6 +31,8 @@ namespace DuskWing
     public class DuskWing : BaseUnityPlugin
     {
         public static DamageAPI.ModdedDamageType StunCrownDamageType = DamageAPI.ReserveDamageType();
+        public static DamageAPI.ModdedDamageType ImpairDamageType = DamageAPI.ReserveDamageType();
+        public static DamageAPI.ModdedDamageType LockOnDamageType = DamageAPI.ReserveDamageType();
 
         // if you don't change these you're giving permission to deprecate the mod-
         //  please change the names to your own stuff, thanks
@@ -82,30 +84,44 @@ namespace DuskWing
             // a simple stat hook, adds armor after stats are recalculated
             if (self)
             {
-                if (self.HasBuff(Modules.Buffs.armorBuff))
+                if (self.HasBuff(Modules.Buffs.lockOnBuff))
                 {
-                    self.armor += 300f;
                 }
             }
         }
 
         private static void StunCrownDamageHandler(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo info)
         {
-            if (!self.isInFrozenState)
+            if (info.HasModdedDamageType(ImpairDamageType))
             {
-                Debug.Log("test");
-                if (info.HasModdedDamageType(StunCrownDamageType))
+                var onHurt = self.body.GetComponent<SetStateOnHurt>();
+                if (onHurt)
                 {
-                    if (NetworkServer.active)
-                    {
-                        Debug.Log("test 2");
-                        var onHurt = self.body.GetComponent<SetStateOnHurt>();
-                        if (onHurt)
-                        {
-                            Debug.Log("test 3");
-                            onHurt.SetStun(StaticValues.StunCrownStun);
-                        }
-                    }
+                    onHurt.SetStun(StaticValues.ImpairStun);
+                }
+            }
+            if (info.HasModdedDamageType(StunCrownDamageType))
+            {
+                var onHurt = self.body.GetComponent<SetStateOnHurt>();
+                if (onHurt)
+                {
+                    onHurt.SetStun(StaticValues.StunCrownStun);
+                }
+            }
+            if (self.body.HasBuff(Modules.Buffs.lockOnBuff))
+            {
+                //var onHurt = self.body.GetComponent<SetStateOnHurt>();
+                //if (onHurt)
+                //{
+                    info.crit = true;
+                    self.body.ClearTimedBuffs(Modules.Buffs.lockOnBuff);
+                //}
+            }
+            if (info.HasModdedDamageType(LockOnDamageType))
+            {
+                if (self.body)
+                {
+                    self.body.AddTimedBuff(Modules.Buffs.lockOnBuff, 60f);
                 }
             }
             orig(self, info);

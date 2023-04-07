@@ -14,20 +14,17 @@ namespace DuskWing.SkillStates
         //ordinarily I recommend not having a delay before projectiles. makes the move feel sluggish
         //public static float BaseDelayDuration = 0.01f * BaseDuration;
 
-        public static float DamageCoefficient = StaticValues.BurstLauncherDamageCoefficient;
-
         public override void OnEnter()
         {
-            base.projectilePrefab = Modules.Projectiles.bombPrefab;
+            base.projectilePrefab = Modules.Projectiles.pipePrefab;
             //base.effectPrefab = Modules.Assets.SomeMuzzleEffect;
             //targetmuzzle = "muzzleThrow"
 
             base.attackSoundString = "DuskWingBombThrow";
             
             base.baseDuration = BaseDuration;
-            //base.baseDelayBeforeFiringProjectile = BaseDelayDuration;
 
-            base.damageCoefficient = DamageCoefficient;
+            base.damageCoefficient = StaticValues.BurstLauncherDamageCoefficient;
             //proc coefficient is set on the components of the projectile prefab
             base.force = 500f;
 
@@ -37,7 +34,6 @@ namespace DuskWing.SkillStates
 
             base.recoilAmplitude = 0.1f;
             base.bloom = 10;
-
             base.OnEnter();
         }
 

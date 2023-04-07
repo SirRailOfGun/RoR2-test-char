@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3d686e035b41d454bb40e6538c135530
+guid: 5f744f3faa707a14191c73228c550c8c
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: D_Wing
-    second: {fileID: 2100000, guid: f2fcb508f204567429c00e6c1d9b6976, type: 2}
+      name: Hologram
+    second: {fileID: 2100000, guid: 2b8d11a0243a6534bb02faa67481573b, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -46,8 +46,8 @@ ModelImporter:
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0

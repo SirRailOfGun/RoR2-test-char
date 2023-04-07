@@ -5,63 +5,83 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using DuskWing.Modules;
+using UnityEngine.Networking;
+using RoR2.Skills;
 
-namespace DuskWing.SkillStates.Henry
+namespace DuskWing.SkillStates
 {
-    internal class HallOfMirrors : BaseState
+    internal class HallOfMirrors : SkillDef
     {
-        public override void OnEnter()
+        // Token: 0x060045B7 RID: 17847 RVA: 0x00121AEF File Offset: 0x0011FCEF
+        [RuntimeInitializeOnLoadMethod]
+        private static void Init()
         {
-            base.OnEnter();
-            this.duration = HallOfMirrors.baseDuration / this.attackSpeedStat;
-            if (base.isAuthority)
+            HallOfMirrors.HallOfMirrorsPassiveAttatchmentPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/BodyAttachments/HallOfMirrorsPassiveAttatchment");
+        }
+
+        // Token: 0x060045BA RID: 17850 RVA: 0x00121B21 File Offset: 0x0011FD21
+        public override float GetRechargeInterval(GenericSkill skillSlot)
+        {
+            return (float)skillSlot.characterBody.inventory.GetItemCount(RoR2Content.Items.LunarSpecialReplacement) * this.baseRechargeInterval;
+        }
+
+        // Token: 0x040043D2 RID: 17362
+        private static GameObject HallOfMirrorsPassiveAttatchmentPrefab;
+
+        // Token: 0x02000C07 RID: 3079
+        private class InstanceData : SkillDef.BaseSkillInstanceData
+        {
+            // Token: 0x17000658 RID: 1624
+            // (get) Token: 0x060045BC RID: 17852 RVA: 0x00121B40 File Offset: 0x0011FD40
+            // (set) Token: 0x060045BD RID: 17853 RVA: 0x00121B48 File Offset: 0x0011FD48
+            public GenericSkill skillSlot
             {
-                Ray aimRay = base.GetAimRay();
-                FireProjectileInfo fireProjectileInfo = new FireProjectileInfo
+                get
                 {
-                    crit = base.RollCrit(),
-                    damage = this.damageStat * HallOfMirrors.damageCoefficient,
-                    damageColorIndex = DamageColorIndex.Default,
-                    force = 0f,
-                    owner = base.gameObject,
-                    position = aimRay.origin,
-                    procChainMask = default(ProcChainMask),
-                    projectilePrefab = HallOfMirrors.projectilePrefab,
-                    rotation = Quaternion.LookRotation(aimRay.direction),
-                    target = null
-                };
-                ProjectileManager.instance.FireProjectile(fireProjectileInfo);
+                    return this._skillSlot;
+                }
+                set
+                {
+                    if (this._skillSlot == value)
+                    {
+                        return;
+                    }
+                    if (this._skillSlot != null)
+                    {
+                        this._skillSlot.characterBody.onInventoryChanged -= this.OnInventoryChanged;
+                    }
+                    if (this.hallOfMirrorsPassiveAttatchment)
+                    {
+                        UnityEngine.Object.Destroy(this.hallOfMirrorsPassiveAttatchment.gameObject);
+                    }
+                    this.hallOfMirrorsPassiveAttatchment = null;
+                    this._skillSlot = value;
+                    if (this._skillSlot != null)
+                    {
+                        this._skillSlot.characterBody.onInventoryChanged += this.OnInventoryChanged;
+                        if (NetworkServer.active && this._skillSlot.characterBody)
+                        {
+                            GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(HallOfMirrors.HallOfMirrorsPassiveAttatchmentPrefab);
+                            this.hallOfMirrorsPassiveAttatchment = gameObject.GetComponent<HallOfMirrorsPassiveAttatchment>();
+                            this.hallOfMirrorsPassiveAttatchment.monitoredSkill = this.skillSlot;
+                            gameObject.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(this._skillSlot.characterBody.gameObject, null);
+                        }
+                    }
+                }
             }
-            EffectManager.SimpleMuzzleFlash(HallOfMirrors.muzzleflashObject, base.gameObject, HallOfMirrors.muzzleString, false);
-            Util.PlaySound(HallOfMirrors.soundString, base.gameObject);
-        }
 
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-            if (base.isAuthority && this.duration <= base.age)
+            // Token: 0x060045BE RID: 17854 RVA: 0x00121C2F File Offset: 0x0011FE2F
+            public void OnInventoryChanged()
             {
-                this.outer.SetNextStateToMain();
+                this.skillSlot.RecalculateValues();
             }
+
+            // Token: 0x040043D3 RID: 17363
+            private GenericSkill _skillSlot;
+
+            // Token: 0x040043D4 RID: 17364
+            private SkillStates.HallOfMirrorsPassiveAttatchment hallOfMirrorsPassiveAttatchment;
         }
-
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.Frozen;
-        }
-
-        public static GameObject projectilePrefab;
-
-        public static float baseDuration;
-
-        public static float damageCoefficient;
-
-        public static string muzzleString;
-
-        public static GameObject muzzleflashObject;
-
-        public static string soundString;
-
-        private float duration;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BepInEx.Configuration;
 using DuskWing.Modules.Characters;
+using DuskWing.SkillStates;
 using RoR2;
 using RoR2.Skills;
 using System;
@@ -64,7 +65,7 @@ namespace DuskWing.Modules.Survivors
                                                                           //if you have more than one character, easily create a config to enable/disable them like this
         public override ConfigEntry<bool> characterEnabledConfig => null; //Modules.Config.CharacterEnableConfig(bodyName);
 
-        private static UnlockableDef masterySkinUnlockableDef;
+        //private static UnlockableDef masterySkinUnlockableDef;
 
         public override void InitializeCharacter()
         {
@@ -138,7 +139,7 @@ namespace DuskWing.Modules.Survivors
                 skillName = prefix + "_DUSK_WING_BODY_UTILITY_STUN_CROWN_NAME",
                 skillNameToken = prefix + "_DUSK_WING_BODY_UTILITY_STUN_CROWN_NAME",
                 skillDescriptionToken = prefix + "_DUSK_WING_BODY_UTILITY_STUN_CROWN_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSSCBurstAttackIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.StunCrown)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
@@ -161,13 +162,13 @@ namespace DuskWing.Modules.Survivors
             #endregion
 
             #region Special
-            SkillDef bombSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef specialSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_DUSK_WING_BODY_SPECIAL_BOMB_NAME",
-                skillNameToken = prefix + "_DUSK_WING_BODY_SPECIAL_BOMB_NAME",
-                skillDescriptionToken = prefix + "_DUSK_WING_BODY_SPECIAL_BOMB_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
+                skillName = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_NAME",
+                skillNameToken = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_NAME",
+                skillDescriptionToken = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSSCLogoIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HallOfMirrorsWarp)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
                 baseRechargeInterval = 10f,
@@ -179,16 +180,45 @@ namespace DuskWing.Modules.Survivors
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = false,
-                cancelSprintingOnActivation = true,
+                cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddSpecialSkills(bodyPrefab, bombSkillDef);
+            Modules.Skills.AddSpecialSkills(bodyPrefab, specialSkillDef);
+            #endregion
+
+            #region Special Passive
+            bodyPrefab.AddComponent<HallOfMirrorsPassiveAttatchment>();
+            //SkillDef passivePart = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            //{
+            //    //skillName = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_NAME",
+            //    //skillNameToken = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_NAME",
+            //    //skillDescriptionToken = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_DESCRIPTION",
+            //    //skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSSCLogoIcon"),
+            //    activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HallOfMirrors)),
+            //    activationStateMachineName = "Slide",
+            //    baseMaxStock = 1,
+            //    baseRechargeInterval = 10f,
+            //    beginSkillCooldownOnSkillEnd = false,
+            //    canceledFromSprinting = false,
+            //    forceSprintDuringState = false,
+            //    fullRestockOnAssign = true,
+            //    interruptPriority = EntityStates.InterruptPriority.Skill,
+            //    resetCooldownTimerOnUse = false,
+            //    //isCombatSkill = true,
+            //    mustKeyPress = false,
+            //    cancelSprintingOnActivation = false,
+            //    rechargeStock = 1,
+            //    requiredStock = 1,
+            //    stockToConsume = 1
+            //});
+
+            //Modules.Skills.AddSpecialSkills(bodyPrefab, passivePart);
             #endregion
         }
-        
+
         public override void InitializeSkins()
         {
             ModelSkinController skinController = prefabCharacterModel.gameObject.AddComponent<ModelSkinController>();

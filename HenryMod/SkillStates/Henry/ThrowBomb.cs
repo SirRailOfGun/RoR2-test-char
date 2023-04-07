@@ -17,7 +17,7 @@ namespace DuskWing.SkillStates
 
         public override void OnEnter()
         {
-            base.projectilePrefab = Modules.Projectiles.bombPrefab;
+            base.projectilePrefab = Modules.Projectiles.pipePrefab;
             //base.effectPrefab = Modules.Assets.SomeMuzzleEffect;
             //targetmuzzle = "muzzleThrow"
 

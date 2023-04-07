@@ -18,11 +18,17 @@ namespace DuskWing.Modules
         internal const float gunDamageCoefficient = 4.2f;
 
         internal const float BurstLauncherDamageCoefficient = 3.5f;
+        internal const float ImpairStun = 1f;
 
         internal const float StunCrownDamageCoefficient = 1.0f;
         internal const float StunCrownBlastSize = 40.0f;
         internal const float StunCrownStun = 5f;
 
         internal const float bombDamageCoefficient = 16f;
+
+        internal const float hallOfMirrorsDamageCoefficient = 6f;
+        internal const float hallOfMirrorsHologramDelay = 6f;
+        internal const string hallOfMirrorsPrefab = "DWHologramPrefab";
+        internal const string hallOfMirrorsPassivePrefab = "DWPassivePrefab";
     }
 }

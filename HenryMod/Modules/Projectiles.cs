@@ -4,18 +4,22 @@ using RoR2.Projectile;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Networking;
+using static R2API.DamageAPI;
 
 namespace DuskWing.Modules
 {
     internal static class Projectiles
     {
-        internal static GameObject bombPrefab;
+        internal static GameObject pipePrefab;
+        internal static GameObject hologramPrefab;
 
         internal static void RegisterProjectiles()
         {
             CreateBomb();
+            CreateHologram();
 
-            AddProjectile(bombPrefab);
+            AddProjectile(pipePrefab);
+            AddProjectile(hologramPrefab);
         }
 
         internal static void AddProjectile(GameObject projectileToAdd)
@@ -25,23 +29,53 @@ namespace DuskWing.Modules
 
         private static void CreateBomb()
         {
-            bombPrefab = CloneProjectilePrefab("CommandoGrenadeProjectile", "DuskWingBombProjectile");
+            pipePrefab = CloneProjectilePrefab("CommandoGrenadeProjectile", "DuskWingBombProjectile");
 
-            ProjectileImpactExplosion bombImpactExplosion = bombPrefab.GetComponent<ProjectileImpactExplosion>();
+            ProjectileImpactExplosion bombImpactExplosion = pipePrefab.GetComponent<ProjectileImpactExplosion>();
             InitializeImpactExplosion(bombImpactExplosion);
-            bombPrefab.GetComponent<ProjectileSimple>().desiredForwardSpeed = 200f;
+            pipePrefab.GetComponent<ProjectileSimple>().desiredForwardSpeed = 200f;
+
+            //bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
+            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("DuskWingBombExplosion");
 
             bombImpactExplosion.blastRadius = 4f;
             bombImpactExplosion.destroyOnEnemy = true;
             bombImpactExplosion.lifetime = 12f;
-            //bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
-            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("DuskWingBombExplosion");
             bombImpactExplosion.timerAfterImpact = true;
             bombImpactExplosion.lifetimeAfterImpact = 0f;
+            bombImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
 
-            ProjectileController bombController = bombPrefab.GetComponent<ProjectileController>();
+            ProjectileController bombController = pipePrefab.GetComponent<ProjectileController>();
             if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("DWgrenadeGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("DWgrenadeGhost");
             bombController.startSound = "";
+        }
+
+        private static void CreateHologram()
+        {
+            hologramPrefab = CloneProjectilePrefab("LoaderPylon", "DuskWingHologramProjectile");
+            hologramPrefab.AddComponent<ProjectileExplosion>();
+            ProjectileExplosion hologramDetonation = hologramPrefab.GetComponent<ProjectileExplosion>();
+            InitializeTimedExplosion(hologramDetonation);
+
+            //ProjectileImpactExplosion bombImpactExplosion = pipePrefab.GetComponent<ProjectileImpactExplosion>();
+            //InitializeImpactExplosion(bombImpactExplosion);
+            hologramPrefab.GetComponent<ProjectileSimple>().desiredForwardSpeed = 0f;
+            hologramPrefab.GetComponent<ProjectileSimple>().lifetime = 30f;
+
+            hologramPrefab.GetComponent<ProjectileProximityBeamController>().attackFireCount = 1;
+            hologramPrefab.GetComponent<ProjectileProximityBeamController>().attackInterval = 2f;
+            hologramPrefab.GetComponent<ProjectileProximityBeamController>().damageCoefficient = 0f;
+            hologramPrefab.GetComponent<ProjectileProximityBeamController>().procCoefficient = 0f;
+            hologramPrefab.GetComponent<ProjectileProximityBeamController>().inheritDamageType = true;
+
+            hologramPrefab.AddComponent<ModdedDamageTypeHolderComponent>();
+            hologramPrefab.GetComponent<ModdedDamageTypeHolderComponent>().Add(DuskWing.LockOnDamageType);
+            hologramDetonation.blastRadius = 7f;
+            hologramDetonation.blastDamageCoefficient = 6f;
+
+            ProjectileController hologramController = hologramPrefab.GetComponent<ProjectileController>();
+            if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("DWhologramGhost") != null) hologramController.ghostPrefab = CreateGhostPrefab("DWhologramGhost");
+            hologramController.startSound = "";
         }
 
         private static void InitializeImpactExplosion(ProjectileImpactExplosion projectileImpactExplosion)
@@ -65,6 +99,21 @@ namespace DuskWing.Modules
             projectileImpactExplosion.timerAfterImpact = false;
 
             projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+        }
+
+        private static void InitializeTimedExplosion(ProjectileExplosion projectileExplosion)
+        {
+            projectileExplosion.blastDamageCoefficient = 1f;
+            projectileExplosion.blastProcCoefficient = 1f;
+            projectileExplosion.blastRadius = 1f;
+            projectileExplosion.bonusBlastForce = Vector3.zero;
+            projectileExplosion.childrenCount = 0;
+            projectileExplosion.childrenDamageCoefficient = 0f;
+            projectileExplosion.childrenProjectilePrefab = null;
+            projectileExplosion.falloffModel = RoR2.BlastAttack.FalloffModel.None;
+            projectileExplosion.fireChildren = false;
+
+            projectileExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
         }
 
         private static GameObject CreateGhostPrefab(string ghostName)
