@@ -49,6 +49,29 @@ namespace DuskWing.Modules
             if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("DWgrenadeGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("DWgrenadeGhost");
             bombController.startSound = "";
         }
+        private static void CreateScepterBomb()
+        {
+            pipePrefab = CloneProjectilePrefab("CommandoGrenadeProjectile", "DuskWingBombProjectile");
+
+            ProjectileImpactExplosion bombImpactExplosion = pipePrefab.GetComponent<ProjectileImpactExplosion>();
+            InitializeImpactExplosion(bombImpactExplosion);
+            pipePrefab.GetComponent<ProjectileSimple>().desiredForwardSpeed = 200f;
+
+            //bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
+            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("DuskWingBombExplosion");
+
+            bombImpactExplosion.blastRadius = 4f;
+            bombImpactExplosion.destroyOnEnemy = true;
+            bombImpactExplosion.lifetime = 12f;
+            bombImpactExplosion.timerAfterImpact = true;
+            bombImpactExplosion.lifetimeAfterImpact = 0f;
+            bombImpactExplosion.blastProcCoefficient = 2f;
+            bombImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+
+            ProjectileController bombController = pipePrefab.GetComponent<ProjectileController>();
+            if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("DWgrenadeGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("DWgrenadeGhost");
+            bombController.startSound = "";
+        }
 
         private static void CreateHologram()
         {

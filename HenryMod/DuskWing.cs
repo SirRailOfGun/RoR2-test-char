@@ -74,7 +74,7 @@ namespace DuskWing
         private void Hook()
         {
             // run hooks here, disabling one is as simple as commenting out the line
-            On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
+            //On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
         }
 
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
@@ -110,12 +110,8 @@ namespace DuskWing
             }
             if (self.body.HasBuff(Modules.Buffs.lockOnBuff))
             {
-                //var onHurt = self.body.GetComponent<SetStateOnHurt>();
-                //if (onHurt)
-                //{
-                    info.crit = true;
-                    self.body.ClearTimedBuffs(Modules.Buffs.lockOnBuff);
-                //}
+                info.crit = true;
+                self.body.ClearTimedBuffs(Modules.Buffs.lockOnBuff);
             }
             if (info.HasModdedDamageType(LockOnDamageType))
             {

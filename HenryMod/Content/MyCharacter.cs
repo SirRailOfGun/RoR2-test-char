@@ -5,7 +5,9 @@ using RoR2;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace DuskWing.Modules.Survivors
 {
@@ -22,7 +24,7 @@ namespace DuskWing.Modules.Survivors
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
-            bodyName = "HenryTutorialBody",
+            bodyName = "DuskWingBody",
             bodyNameToken = DUSKWING_PREFIX + "NAME",
             subtitleNameToken = DUSKWING_PREFIX + "SUBTITLE",
 
@@ -89,6 +91,7 @@ namespace DuskWing.Modules.Survivors
 
         public override void InitializeSkills()
         {
+            Debug.LogError("Skill Initializing Now");
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
             string prefix = DuskWing.DEVELOPER_PREFIX;
 
@@ -169,7 +172,7 @@ namespace DuskWing.Modules.Survivors
                 skillDescriptionToken = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSSCLogoIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HallOfMirrorsWarp)),
-                activationStateMachineName = "Slide",
+                activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 10f,
                 beginSkillCooldownOnSkillEnd = false,
@@ -190,32 +193,19 @@ namespace DuskWing.Modules.Survivors
             #endregion
 
             #region Special Passive
+            NetworkedBodyAttachment networkedBodyAttachment = new NetworkedBodyAttachment();
+            networkedBodyAttachment.AttachToGameObjectAndSpawn(bodyPrefab, "DuskWing");
+            networkedBodyAttachment._attachedBodyObject = bodyPrefab;
+            if (!networkedBodyAttachment.attachedBodyObject && NetworkServer.active)
+            {
+                Debug.LogError("BodyObject is still null!!!!");
+            }
+            else
+            {
+                Debug.LogError(networkedBodyAttachment.attachedBodyObject);
+            }
             bodyPrefab.AddComponent<HallOfMirrorsPassiveAttatchment>();
-            //SkillDef passivePart = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            //{
-            //    //skillName = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_NAME",
-            //    //skillNameToken = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_NAME",
-            //    //skillDescriptionToken = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_DESCRIPTION",
-            //    //skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSSCLogoIcon"),
-            //    activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HallOfMirrors)),
-            //    activationStateMachineName = "Slide",
-            //    baseMaxStock = 1,
-            //    baseRechargeInterval = 10f,
-            //    beginSkillCooldownOnSkillEnd = false,
-            //    canceledFromSprinting = false,
-            //    forceSprintDuringState = false,
-            //    fullRestockOnAssign = true,
-            //    interruptPriority = EntityStates.InterruptPriority.Skill,
-            //    resetCooldownTimerOnUse = false,
-            //    //isCombatSkill = true,
-            //    mustKeyPress = false,
-            //    cancelSprintingOnActivation = false,
-            //    rechargeStock = 1,
-            //    requiredStock = 1,
-            //    stockToConsume = 1
-            //});
-
-            //Modules.Skills.AddSpecialSkills(bodyPrefab, passivePart);
+            bodyPrefab.GetComponent<HallExtention>();
             #endregion
         }
 

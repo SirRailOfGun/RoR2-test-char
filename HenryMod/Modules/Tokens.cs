@@ -46,7 +46,10 @@ namespace DuskWing.Modules
             //LanguageAPI.Add(prefix + "SECONDARY_GUN_NAME", "Handgun");
             //LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Helpers.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * StaticValues.gunDamageCoefficient}% damage</style>.");
             LanguageAPI.Add(prefix + "SECONDARY_BURST_LAUNCHER_NAME", "Burst Launcher");
-            LanguageAPI.Add(prefix + "SECONDARY_BURST_LAUNCHER_DESCRIPTION", $"Fire a grenade for <style=cIsDamage>{100f * StaticValues.BurstLauncherDamageCoefficient}% damage</style> which <style=cIsUtility>stuns</style> on crit.");
+            LanguageAPI.Add(prefix + "SECONDARY_BURST_LAUNCHER_DESCRIPTION", $"Fire a grenade for <style=cIsDamage>{100f * StaticValues.BurstLauncherDamageCoefficient}% damage</style>.");
+
+            LanguageAPI.Add(prefix + "SECONDARY_BURST_LAUNCHER_SCEPTER_NAME", "Paracausal Burst Launcher");
+            LanguageAPI.Add(prefix + "SECONDARY_BURST_LAUNCHER_SCEPTER_DESCRIPTION", $"Fire a grenade for <style=cIsDamage>{100f * StaticValues.BurstLauncherDamageCoefficient}% damage</style> which is twice as likely to activate effects.");
             #endregion
 
             #region Utility
