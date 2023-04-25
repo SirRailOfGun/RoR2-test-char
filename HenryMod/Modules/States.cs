@@ -9,7 +9,7 @@ namespace DuskWing.Modules
             Modules.Content.AddEntityState(typeof(VeilRifle));
             Modules.Content.AddEntityState(typeof(BurstLauncher));
             Modules.Content.AddEntityState(typeof(StunCrown));
-            Modules.Content.AddEntityState(typeof(HallOfMirrorsWarp));
+            Modules.Content.AddEntityState(typeof(SpotterDrone));
         }
     }
 }

@@ -5,6 +5,7 @@ using R2API;
 using R2API.Utils;
 using RoR2;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Security;
 using System.Security.Permissions;
 using UnityEngine;
@@ -18,6 +19,7 @@ using static R2API.DamageAPI;
 namespace DuskWing
 {
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
     [R2APISubmoduleDependency(new string[]
@@ -46,6 +48,8 @@ namespace DuskWing
 
         public static DuskWing instance;
 
+        public static bool ancientScepterInstalled = false;
+
         public static PluginInfo PInfo { get; private set; }
         private void Awake()
         {
@@ -69,6 +73,29 @@ namespace DuskWing
 
             On.RoR2.HealthComponent.TakeDamage += StunCrownDamageHandler;
             Hook();
+        }
+        private void SetupModCompat()
+        {
+            //scepter stuff- dll won't compile without a reference to TILER2 and ClassicItems
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter"))
+            {
+                ancientScepterInstalled = true;
+            }
+
+            //FixItemDisplays();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void ScepterSetup()
+        {
+            //AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterSpecialSkillDef, "MinerBody", SkillSlot.Special, 1);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void ScepterClassicSetup()
+        {
+            //ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(scepterSpecialSkillDef, "MinerBody", SkillSlot.Special, specialSkillDef);
+            //ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(scepterSpecialClassicSkillDef, "MinerBody", SkillSlot.Special, specialClassicSkillDef);
         }
 
         private void Hook()

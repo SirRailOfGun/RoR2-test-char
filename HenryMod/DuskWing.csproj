@@ -34,6 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="AncientScepter">
+      <HintPath>C:\Users\Michael\AppData\Roaming\Thunderstore Mod Manager\DataFolder\RiskOfRain2\profiles\Mod Dev\BepInEx\plugins\amogus_lovers-StandaloneAncientScepter\AncientScepter.dll</HintPath>
+    </Reference>
     <Reference Include="R2API">
       <HintPath>..\libs\R2API.dll</HintPath>
     </Reference>

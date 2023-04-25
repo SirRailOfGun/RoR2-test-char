@@ -1,33 +1,33 @@
-﻿using DuskWing.Modules;
-using EntityStates;
-using RoR2;
+﻿using EntityStates;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
 using RoR2.Projectile;
+using RoR2;
 using UnityEngine;
+using DuskWing.Modules;
+using UnityEngine.Networking;
+using System.Linq;
 
 namespace DuskWing.SkillStates
 {
-    public class BurstLauncher : GenericProjectileBaseState
+    internal class SpotterDroneScepter : GenericProjectileBaseState
     {
-
         public static float BaseDuration = 0.3f;
-        //delay here for example and to match animation
-        //ordinarily I recommend not having a delay before projectiles. makes the move feel sluggish
-        //public static float BaseDelayDuration = 0.01f * BaseDuration;
 
         public override void OnEnter()
         {
-            base.projectilePrefab = Modules.Projectiles.pipePrefab;
-            this.duration = this.baseDuration / base.attackSpeedStat;
+            base.projectilePrefab = Modules.Projectiles.heldImagePrefab;
             //base.effectPrefab = Modules.Assets.SomeMuzzleEffect;
             //targetmuzzle = "muzzleThrow"
 
             base.attackSoundString = "DuskWingBombThrow";
-            
+
             base.baseDuration = BaseDuration;
 
-            base.damageCoefficient = StaticValues.BurstLauncherDamageCoefficient;
+            base.damageCoefficient = StaticValues.hallOfMirrorsDamageCoefficient;
             //proc coefficient is set on the components of the projectile prefab
-            base.force = 500f;
 
             //base.projectilePitchBonus = 0;
             //base.minSpread = 0;

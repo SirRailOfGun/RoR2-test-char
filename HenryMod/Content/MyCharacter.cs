@@ -118,7 +118,7 @@ namespace DuskWing.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.BurstLauncher)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
-                baseRechargeInterval = 4f,
+                baseRechargeInterval = 6f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -167,12 +167,12 @@ namespace DuskWing.Modules.Survivors
             #region Special
             SkillDef specialSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_NAME",
-                skillNameToken = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_NAME",
-                skillDescriptionToken = prefix + "_DUSK_WING_BODY_SPECIAL_HALL_OF_MIRRORS_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSSCLogoIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HallOfMirrorsWarp)),
-                activationStateMachineName = "Body",
+                skillName = prefix + "_DUSK_WING_BODY_SPECIAL_SPOTTER_DRONE_NAME",
+                skillNameToken = prefix + "_DUSK_WING_BODY_SPECIAL_SPOTTER_DRONE_NAME",
+                skillDescriptionToken = prefix + "_DUSK_WING_BODY_SPECIAL_SPOTTER_DRONE_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSSCDroneAttackIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.SpotterDrone)),
+                activationStateMachineName = "Slide",
                 baseMaxStock = 1,
                 baseRechargeInterval = 10f,
                 beginSkillCooldownOnSkillEnd = false,
@@ -192,21 +192,34 @@ namespace DuskWing.Modules.Survivors
             Modules.Skills.AddSpecialSkills(bodyPrefab, specialSkillDef);
             #endregion
 
-            #region Special Passive
-            NetworkedBodyAttachment networkedBodyAttachment = new NetworkedBodyAttachment();
-            networkedBodyAttachment.AttachToGameObjectAndSpawn(bodyPrefab, "DuskWing");
-            networkedBodyAttachment._attachedBodyObject = bodyPrefab;
-            if (!networkedBodyAttachment.attachedBodyObject && NetworkServer.active)
+            #region Scepter
+            SkillDef scepterSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                Debug.LogError("BodyObject is still null!!!!");
-            }
-            else
-            {
-                Debug.LogError(networkedBodyAttachment.attachedBodyObject);
-            }
-            bodyPrefab.AddComponent<HallOfMirrorsPassiveAttatchment>();
-            bodyPrefab.GetComponent<HallExtention>();
+                skillName = prefix + "_DUSK_WING_BODY_SPECIAL_SPOTTER_DRONE_SCEPTER_NAME",
+                skillNameToken = prefix + "_DUSK_WING_BODY_SPECIAL_SPOTTER_DRONE_SCEPTER_NAME",
+                skillDescriptionToken = prefix + "_DUSK_WING_BODY_SPECIAL_SPOTTER_DRONE_SCEPTER_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texHeldImageIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.SpotterDrone)),
+                activationStateMachineName = "Slide",
+                baseMaxStock = 1,
+                baseRechargeInterval = 10f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterSkillDef, "DuskWingBody", SkillSlot.Special, 0);
             #endregion
+
         }
 
         public override void InitializeSkins()

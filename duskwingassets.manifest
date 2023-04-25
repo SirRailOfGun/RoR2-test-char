@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1871917080
+CRC: 1780659676
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4969ac7478306190d0a350fadd49b522
+    Hash: e6d14de00b19dbe9a262c90d48f654d1
   TypeTreeHash:
     serializedVersion: 2
     Hash: 740584176fc78b859e604f8258f4482c
@@ -91,6 +91,7 @@ Assets:
 - Assets/HenryAssets/Icons/texSSCRangedAttackIcon.png
 - Assets/HenryAssets/Animation/clips/Jump.anim
 - Assets/HenryAssets/Mesh/meshHenryNeo.mesh
+- Assets/HenryAssets/Icons/texSSCDroneAttackIcon.png
 - Assets/HenryAssets/Animation/clips/WalkR.anim
 - Assets/HenryAssets/VFX/HenryDustEffect.prefab
 - Assets/HenryAssets/Animation/clips/SprintL.anim
@@ -175,6 +176,7 @@ Assets:
 - Assets/HenryAssets/Animation/clips/IdleIn.anim
 - Assets/HenryAssets/VFX/Materials/matSwingShadow.mat
 - Assets/HenryAssets/Textures/texHenryJediEmission.png
+- Assets/HenryAssets/Icons/texSSCBurstAttackIcon.png
 - Assets/HenryAssets/Mesh/meshDanteCoat.mesh
 - Assets/HenryAssets/Animation/clips/RestIdle.anim
 - Assets/HenryAssets/Animation/clips/ThrowBomb.anim
@@ -201,6 +203,7 @@ Assets:
 - Assets/HenryAssets/Icons/texPistolIcon.png
 - Assets/HenryAssets/VFX/Materials/matDust.mat
 - Assets/HenryAssets/VFX/Textures/texSmoke.png
+- Assets/HenryAssets/Icons/texHeldImageIcon.png
 - Assets/HenryAssets/VFX/Textures/texEmbers.png
 - Assets/HenryAssets/Mesh/meshVergilCoat.mesh
 - Assets/HenryAssets/VFX/Textures/texLightning.tif
@@ -208,6 +211,7 @@ Assets:
 - Assets/HenryAssets/VFX/Materials/matRipple.mat
 - Assets/HenryAssets/Animation/clips/DefaultPose.anim
 - Assets/HenryAssets/Materials/matShotgun.mat
+- Assets/HenryAssets/Dusk Wing joined.fbx
 - Assets/HenryAssets/Animation/clips/IdleAdditive.anim
 - Assets/HenryAssets/mdlDuskWing.prefab
 - Assets/HenryAssets/Icons/texBazookaFireIcon.png
@@ -229,7 +233,6 @@ Assets:
 - Assets/HenryAssets/Textures/texHenryDanteEmission.png
 - Assets/HenryAssets/Animation/clips/MenuIdleIn.anim
 - Assets/HenryAssets/VFX/ImpactHenryPunch.prefab
-- Assets/HenryAssets/Icons/texSSCBurstAttackIcon.png
 - Assets/HenryAssets/Animation/clips/Slash1.anim
 - Assets/HenryAssets/VFX/HenryBazookaExplosionEffect.prefab
 - Assets/HenryAssets/Animation/clips/Roll.anim

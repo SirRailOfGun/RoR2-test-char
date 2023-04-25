@@ -47,9 +47,6 @@ namespace DuskWing.Modules
             //LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Helpers.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * StaticValues.gunDamageCoefficient}% damage</style>.");
             LanguageAPI.Add(prefix + "SECONDARY_BURST_LAUNCHER_NAME", "Burst Launcher");
             LanguageAPI.Add(prefix + "SECONDARY_BURST_LAUNCHER_DESCRIPTION", $"Fire a grenade for <style=cIsDamage>{100f * StaticValues.BurstLauncherDamageCoefficient}% damage</style>.");
-
-            LanguageAPI.Add(prefix + "SECONDARY_BURST_LAUNCHER_SCEPTER_NAME", "Paracausal Burst Launcher");
-            LanguageAPI.Add(prefix + "SECONDARY_BURST_LAUNCHER_SCEPTER_DESCRIPTION", $"Fire a grenade for <style=cIsDamage>{100f * StaticValues.BurstLauncherDamageCoefficient}% damage</style> which is twice as likely to activate effects.");
             #endregion
 
             #region Utility
@@ -62,8 +59,14 @@ namespace DuskWing.Modules
             #region Special
             //LanguageAPI.Add(prefix + "SPECIAL_BOMB_NAME", "Bomb");
             //LanguageAPI.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * StaticValues.bombDamageCoefficient}% damage</style>.");
-            LanguageAPI.Add(prefix + "SPECIAL_HALL_OF_MIRRORS_NAME", "Hall Of Mirrors");
-            LanguageAPI.Add(prefix + "SPECIAL_HALL_OF_MIRRORS_DESCRIPTION", $"Every <style=cIsUtility>{StaticValues.hallOfMirrorsHologramDelay}</style> seconds, place a Hologram that you can teleport back to dealing <style=cIsDamage>{100f * StaticValues.hallOfMirrorsDamageCoefficient}% damage</style>.");
+            //LanguageAPI.Add(prefix + "SPECIAL_HALL_OF_MIRRORS_NAME", "Hall Of Mirrors");
+            //LanguageAPI.Add(prefix + "SPECIAL_HALL_OF_MIRRORS_DESCRIPTION", $"Every <style=cIsUtility>{StaticValues.hallOfMirrorsHologramDelay}</style> seconds, place a Hologram that you can teleport back to dealing <style=cIsDamage>{100f * StaticValues.hallOfMirrorsDamageCoefficient}% damage</style>.");
+
+            LanguageAPI.Add(prefix + "SPECIAL_SPOTTER_DRONE_NAME", "Lotus Projector");
+            LanguageAPI.Add(prefix + "SPECIAL_SPOTTER_DRONE_DESCRIPTION", $"Deploy a drone which <style=cIsUtility>Locks On</style> to the nearest foe every 2 seconds. The next attack against a Locked On foe is a <style=cIsDamage>crtitical</style>");
+
+            LanguageAPI.Add(prefix + "SPECIAL_SPOTTER_DRONE_SCEPTER_NAME", "The Lesson of the Held Image");
+            LanguageAPI.Add(prefix + "SPECIAL_SPOTTER_DRONE_SCEPTER_DESCRIPTION", $"Deploy a drone which <style=cIsUtility>Locks On</style> to the nearest 2 foes every 1.5 seconds. The next attack against a Locked On foe is a <style=cIsDamage>crtitical</style>");
             #endregion
 
             #region Achievements
